@@ -1,6 +1,6 @@
 <?php
 
-define('token', 'YOUR_BOT:TOKEN');
+define('token', 'YOUR_TOKEN');
 define('api', 'https://api.telegram.org/bot'.token.'/');
 
 $data = file_get_contents("php://input");
@@ -45,12 +45,20 @@ function send($id, $text){
 	apiRequest("sendMessage?text=$text&chat_id=$id");
 }
 
+function sendMark($id, $text){
+	apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
+}
+
 function sendReply($id, $text, $mgi){
        apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
 }
 
 function sendPhoto($id, $im, $cap){
 	apiRequest("sendPhoto?photo=$im&chat_id=$id&caption=$cap");
+}
+
+function sendAudio($id, $au, $ti){
+	apiRequest("sendAudio?audio=$au&chat_id=$id&title=$ti");
 }
 
 function tastiera($tasti, $text, $cd){
