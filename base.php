@@ -9,6 +9,7 @@ $message = $update["message"];
 $text = $message["text"];
 $msgid = $message["message_id"];
 $reply = $message["reply_to_message"];
+$title = $message["from"]["chat"]["title"];
 
 $from = $message["from"];
 $username = $from["username"];
