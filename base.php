@@ -8,6 +8,7 @@ $update = json_decode($data, true);
 $message = $update["message"];
 $text = $message["text"];
 $msgid = $message["message_id"];
+$reply = $message["reply_to_message"];
 
 $from = $message["from"];
 $username = $from["username"];
