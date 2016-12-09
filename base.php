@@ -71,7 +71,7 @@ $diocane = json_encode($dioporco);
 apiRequest("sendMessage?text=$text&chat_id=$cd&reply_markup=$diocane");
 }
 
-function inline($roba1){
+function inline($json){
 
 if($update["inline_query"])
 {
@@ -81,10 +81,6 @@ $msg = $update["inline_query"]["query"];
 $uid = $update["inline_query"]["from"]["id"];
 $q_username = $update["inline_query"]["from"]["username"];
 $q_first = $update["inline_query"]["from"]["first_name"];
-
-$json = array(
-  $roba1,
-);
 
 apiRequest("answerInlineQuery?inline_query_id=$inline&results=$json&cache_time=5");
 
