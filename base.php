@@ -16,17 +16,9 @@ $first = $from["first_name"];
 $last = $from["last_name"];
 $cid = $from["id"];
 
-function single(){
-  return $message['from']['id'];
-}
-
-function group(){
-  return $message['chat']['id'];
-}
-
 if($message['chat']['type'] == 'private'){
   $cid = $message['from']['id'];
-}else if($message['chat']['type'] == 'group' || $msg['chat']['type'] == 'supergroup'){
+}else if($message['chat']['type'] == 'group' || $message['chat']['type'] == 'supergroup'){
   $cid = $message['chat']['id'];
 }
 
