@@ -60,7 +60,7 @@ function sendAudio($id, $au, $ti){
 	apiRequest("sendAudio?audio=$au&chat_id=$id&title=$ti");
 }
 
-function tastiera($tasti, $text, $cd){
+function keyboard($tasti, $text, $cd){
       $dioporco = array(
     'keyboard' => array(
         $tasti
@@ -71,20 +71,20 @@ $diocane = json_encode($dioporco);
 apiRequest("sendMessage?text=$text&chat_id=$cd&reply_markup=$diocane");
 }
 
-function inline($json){
-
-if($update["inline_query"])
-{
-	
-$inline = $update["inline_query"]["id"];
-$msg = $update["inline_query"]["query"];
-$uid = $update["inline_query"]["from"]["id"];
-$q_username = $update["inline_query"]["from"]["username"];
-$q_first = $update["inline_query"]["from"]["first_name"];
-
-apiRequest("answerInlineQuery?inline_query_id=$inline&results=$json&cache_time=5");
-
+function newMember($up){
+  return $message["new_chat_member"];
 }
+
+function leftMember($up){
+  return $message["left_chat_member"];	
+}
+
+function ban($kid, $cd){
+  apiRequest("kickChatMember?chat_id=$kid&user_id=$cd");
+}
+
+function unban($kid, $cd){
+  apiRequest("unbanChatMember?chat_id=$kid&user_id=$cd");
 }
 
 ?>
