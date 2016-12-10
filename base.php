@@ -81,7 +81,7 @@ function unban($kid, $cd){
   apiRequest("unbanChatMember?chat_id=$kid&user_id=$cd");
 }
 
-function inlineKeyboard($menud){
+function inlineKeyboard($menud, $chat, $tx){
 $menu = array(
 		$menud,
 	);
@@ -92,7 +92,7 @@ $menu = array(
 	
 	$d2 = json_encode($d2);
 	
-	apiRequest("sendmessage?chat_id=$cid&text=we&reply_markup=$d2");
+	apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
 }
 
 ?>
