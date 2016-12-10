@@ -66,11 +66,11 @@ apiRequest("sendMessage?text=$text&chat_id=$cd&reply_markup=$diocane");
 }
 
 function newMember($up){
-  return $message["new_chat_member"];
+  return $up["new_chat_member"];
 }
 
 function leftMember($up){
-  return $message["left_chat_member"];	
+  return $up["left_chat_member"];	
 }
 
 function ban($kid, $cd){
@@ -79,6 +79,22 @@ function ban($kid, $cd){
 
 function unban($kid, $cd){
   apiRequest("unbanChatMember?chat_id=$kid&user_id=$cd");
+}
+
+function inlineKeyboard($menud){
+$menu = array(
+		array(
+		    $menud
+		),
+	);
+	
+	$d2 = array(
+		"inline_keyboard" => $menu,
+	);
+	
+	$d2 = json_encode($d2);
+	
+	apiRequest("sendmessage?chat_id=$cid&text=we&reply_markup=$d2");
 }
 
 ?>
