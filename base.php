@@ -82,9 +82,7 @@ function unban($kid, $cd){
 }
 
 function inlineKeyboard($menud, $chat, $tx){
-$menu = array(
-		$menud,
-	);
+$menu = $menud;
 	
 	$d2 = array(
 		"inline_keyboard" => $menu,
