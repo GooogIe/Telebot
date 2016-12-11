@@ -15,6 +15,7 @@ $from = $message["from"];
 $username = $from["username"];
 $first = $from["first_name"];
 $last = $from["last_name"];
+$uid = $from["id"];
 $cid = $from["id"];
 
 if($message['chat']['type'] == 'private'){
@@ -35,15 +36,31 @@ function apiRequest($method)
 }
 
 function send($id, $text){
-	apiRequest("sendMessage?text=$text&chat_id=$id");
+	if(strpos($text, "\n")){
+		$text = urlencode($text);
+	        apiRequest("sendMessage?text=$text&chat_id=$id");
+	}
 }
 
 function sendMark($id, $text){
-	apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
+	if(strpos($text, "\n")){
+		$text = urlencode($text);
+	        apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
+	}
 }
 
 function sendReply($id, $text, $mgi){
-       apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
+	if(strpos($text, "\n")){
+		$text = urlencode($text);
+                apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
+	}
+}
+
+function sendMarkReply($id, $text, $mgi){
+       if(strpos($text, "\n")){
+		$text = urlencode($text);
+                apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi&parse_mode=Markdown");
+	}
 }
 
 function sendPhoto($id, $im, $cap){
