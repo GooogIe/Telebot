@@ -38,29 +38,29 @@ function apiRequest($method)
 function send($id, $text){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
-	        apiRequest("sendMessage?text=$text&chat_id=$id");
 	}
+	apiRequest("sendMessage?text=$text&chat_id=$id");
 }
 
 function sendMark($id, $text){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
-	        apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
 	}
+	apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
 }
 
 function sendReply($id, $text, $mgi){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
-                apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
 	}
+	apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
 }
 
 function sendMarkReply($id, $text, $mgi){
        if(strpos($text, "\n")){
 		$text = urlencode($text);
-                apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi&parse_mode=Markdown");
 	}
+	apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi&parse_mode=Markdown");
 }
 
 function sendPhoto($id, $im, $cap){
