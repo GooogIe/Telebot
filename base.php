@@ -72,25 +72,8 @@ function sendAudio($id, $au, $ti){
 }
 
 function keyboard($tasti, $text, $cd){
-      $dioporco = array(
-    'keyboard' => array(
-        $tasti
-    )
-);
-
-$diocane = json_encode($dioporco);
-	
-	if(strpos($text, "\n")){
-		$text = urlencode($text);
-	}
-	
-apiRequest("sendMessage?text=$text&chat_id=$cd&reply_markup=$diocane");
-}
-
-function kb($tasti, $text, $cd, $rz){
-      $dioporco = array(
-    'keyboard' => $tasti,
-    'resize_keyboard' => $rz
+$dioporco = array(
+	$tasti,
 );
 
 $diocane = json_encode($dioporco);
