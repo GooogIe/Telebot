@@ -72,9 +72,7 @@ function sendAudio($id, $au, $ti){
 }
 
 function keyboard($tasti, $text, $cd){
-$dioporco = array(
-	$tasti,
-);
+$dioporco = $tasti;
 
 $diocane = json_encode($dioporco);
 	
