@@ -18,6 +18,9 @@ $last = $from["last_name"];
 $uid = $from["id"];
 $cid = $from["id"];
 
+$cbid = $update["callback_query"]["id"];
+$cbdata = $update["callback_query"]["data"];
+
 if($message['chat']['type'] == 'private'){
   $cid = $message['from']['id'];
 }else if($message['chat']['type'] == 'group' || $message['chat']['type'] == 'supergroup'){
