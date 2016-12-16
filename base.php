@@ -86,6 +86,10 @@ $diocane = json_encode($dioporco);
 apiRequest("sendMessage?text=$text&chat_id=$cd&reply_markup=$diocane");
 }
 
+function callback($up){
+  return $up["callback_query"];
+}
+
 function newMember($up){
   return $up["new_chat_member"];
 }
