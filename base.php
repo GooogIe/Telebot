@@ -111,11 +111,18 @@ function callbackanswer($id, $text, $alert){
 }
 
 function edit($cd, $mid, $tx){
+	if(strpos($tx, "\n")){
+		$tx = urlencode($tx);
+	}
   apiRequest("editMessageText?chat_id=$cd&message_id=$mid&text=$tx");
 }
 
 function inlineKeyboard($menud, $chat, $tx){
 $menu = $menud;
+	
+	if(strpos($tx, "\n")){
+		$tx = urlencode($tx);
+	}
 	
 	$d2 = array(
 		"inline_keyboard" => $menu,
