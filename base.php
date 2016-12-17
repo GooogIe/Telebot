@@ -106,6 +106,10 @@ function unban($kid, $cd){
   apiRequest("unbanChatMember?chat_id=$kid&user_id=$cd");
 }
 
+function callbackanswer($id, $text, $alert){
+  apiRequest("answerCallbackQuery?callback_query_id=$id&show_alert=$alert&text=$text");
+}
+
 function inlineKeyboard($menud, $chat, $tx){
 $menu = $menud;
 	
