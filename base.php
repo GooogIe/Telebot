@@ -123,7 +123,7 @@ $menu = $menud;
 	
 	$d2 = json_encode($d2);
 	
-	apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
+	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
 }
 
 ?>
