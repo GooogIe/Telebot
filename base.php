@@ -42,36 +42,36 @@ function send($id, $text){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
 	}
-	apiRequest("sendMessage?text=$text&chat_id=$id");
+	return apiRequest("sendMessage?text=$text&chat_id=$id");
 }
 
 function sendMark($id, $text){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
 	}
-	apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
+	return apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
 }
 
 function sendReply($id, $text, $mgi){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
 	}
-	apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
+	return apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
 }
 
 function sendMarkReply($id, $text, $mgi){
        if(strpos($text, "\n")){
 		$text = urlencode($text);
 	}
-	apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi&parse_mode=Markdown");
+	return apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi&parse_mode=Markdown");
 }
 
 function sendPhoto($id, $im, $cap){
-	apiRequest("sendPhoto?photo=$im&chat_id=$id&caption=$cap");
+	return apiRequest("sendPhoto?photo=$im&chat_id=$id&caption=$cap");
 }
 
 function sendAudio($id, $au, $ti){
-	apiRequest("sendAudio?audio=$au&chat_id=$id&title=$ti");
+	return apiRequest("sendAudio?audio=$au&chat_id=$id&title=$ti");
 }
 
 function keyboard($tasti, $text, $cd){
@@ -108,6 +108,10 @@ function unban($kid, $cd){
 
 function callbackanswer($id, $text, $alert){
   apiRequest("answerCallbackQuery?callback_query_id=$id&show_alert=$alert&text=$text");
+}
+
+function edit($cd, $mid, $tx){
+  apiRequest("editMessageText?chat_id=$cd&message_id=$mid&text=$tx");
 }
 
 function inlineKeyboard($menud, $chat, $tx){
