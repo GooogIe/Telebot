@@ -22,7 +22,6 @@ $cbid = $update["callback_query"]["id"];
 $cbdata = $update["callback_query"]["data"];
 
 $glob = false;
-$ulist = false;
 
 if($message['chat']['type'] == 'private'){
   $cid = $message['from']['id'];
@@ -137,7 +136,6 @@ $menu = $menud;
 }
 
 function logusers($ms){
-	if($ulist == true){
 			if($ms['chat']['type'] == 'private'){
 			    if(!file_exists("user.txt")){
 				    file_put_contents("user.txt", '["'.$msg['from']['id'].'"]');
@@ -147,16 +145,11 @@ function logusers($ms){
 				    file_put_contents("user.txt", json_encode($act));
 			    }
 			}
-	}
 }
 
 function usercount(){
-  if($ulist == true){
 	  $list = json_decode(file_get_contents("user.txt"), true);
 	  return count($list);
-  }else{
-	  return 0;
-  }
 }
 
 ?>
