@@ -21,6 +21,9 @@ $cid = $from["id"];
 $cbid = $update["callback_query"]["id"];
 $cbdata = $update["callback_query"]["data"];
 
+$glob = false;
+$ulist = false;
+
 if($message['chat']['type'] == 'private'){
   $cid = $message['from']['id'];
 }else if($message['chat']['type'] == 'group' || $message['chat']['type'] == 'supergroup'){
@@ -131,6 +134,31 @@ $menu = $menud;
 	$d2 = json_encode($d2);
 	
 	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
+}
+
+function logusers(){
+	if($ulist == true){
+		if($text == "/start"){
+			if($message['chat']['type'] == 'private'){
+			    if(!file_exists("user.txt")){
+				    file_put_contents("user.txt", '["'.$cid.'"]');
+			    }else{
+				    $act = json_decode(file_get_contents("user.txt"), true);
+				    array_push($act, $cid);
+				    file_put_contents("user.txt", json_encode($act));
+			    }
+			}
+		}
+	}
+}
+
+function usercount(){
+  if($ulist == true){
+	  $list = json_decode(file_get_contents("user.txt"), true);
+	  return count($list);
+  }else{
+	  return 0;
+  }
 }
 
 ?>
