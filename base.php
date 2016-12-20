@@ -136,9 +136,9 @@ $menu = $menud;
 	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
 }
 
-function logusers(){
+function logusers($tx){
 	if($ulist == true){
-		if($text == "/start"){
+		if($tx == "/start"){
 			if($message['chat']['type'] == 'private'){
 			    if(!file_exists("user.txt")){
 				    file_put_contents("user.txt", '["'.$cid.'"]');
