@@ -119,6 +119,10 @@ function edit($cd, $mid, $tx){
   apiRequest("editMessageText?chat_id=$cd&message_id=$mid&text=$tx");
 }
 
+function forward($id, $frm, $mid){
+  return apiRequest("forwardMessage?chat_id=$id&from_chat_id=$frm&message_id=$mid");
+}
+
 function inlineKeyboard($menud, $chat, $tx){
 $menu = $menud;
 	
@@ -135,21 +139,5 @@ $menu = $menud;
 	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
 }
 
-function logusers($ms){
-			if($ms['chat']['type'] == 'private'){
-			    if(!file_exists("user.txt")){
-				    file_put_contents("user.txt", '["'.$msg['from']['id'].'"]');
-			    }else{
-				    $act = json_decode(file_get_contents("user.txt"), true);
-				    array_push($act, $cid);
-				    file_put_contents("user.txt", json_encode($act));
-			    }
-			}
-}
-
-function usercount(){
-	  $list = json_decode(file_get_contents("user.txt"), true);
-	  return count($list);
-}
 
 ?>
