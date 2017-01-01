@@ -11,6 +11,8 @@ $msgid = $message["message_id"];
 $reply = $message["reply_to_message"];
 $title = $message["from"]["chat"]["title"];
 
+$chat = $message["chat"];
+
 $from = $message["from"];
 $username = $from["username"];
 $first = $from["first_name"];
@@ -22,6 +24,10 @@ $cbid = $update["callback_query"]["id"];
 $cbdata = $update["callback_query"]["data"];
 
 $glob = false;
+
+function type($cha){
+  return $cha["type"];
+}
 
 if($message['chat']['type'] == 'private'){
   $cid = $message['from']['id'];
@@ -122,6 +128,19 @@ function edit($cd, $mid, $tx){
 function forward($id, $frm, $mid){
   return apiRequest("forwardMessage?chat_id=$id&from_chat_id=$frm&message_id=$mid");
 }
+
+function getAdmins($cha){
+   $req = apiRequest("getChatAdministrators?chat_id=$cha");
+   $admins = json_decode($req, true);
+   $idlist = array();
+	
+   foreach($admins['result'] as $adm){
+	   $dd = $adm["user"];
+	   array_push($idlist, $dd);
+   }
+	return $idlist;
+}
+		   
 
 function inlineKeyboard($menud, $chat, $tx){
 $menu = $menud;
