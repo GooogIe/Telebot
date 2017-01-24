@@ -25,6 +25,8 @@ $cbdata = $update["callback_query"]["data"];
 
 $glob = false;
 
+$channel = $update["channel_post"];
+
 function type($cha){
   return $cha["type"];
 }
