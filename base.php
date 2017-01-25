@@ -61,11 +61,11 @@ function apiRequest($method)
 
 function pwrRequest($method)
 {
-    $req = file_get_contents("https://api.pwrtelegram.xyz/bot"+token+"/$method");
+    $req = file_get_contents("https://api.pwrtelegram.xyz/bot".token."/$method");
     return $req;
 }
 
-function addMember($group, $user){ //works only in groups
+function addMember($group, $user){ //works only in groups (not supergroups)
   return pwrRequest("addChatUser?chat_id=$group&user_id=$user");
 }
 
