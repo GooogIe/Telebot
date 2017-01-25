@@ -22,6 +22,7 @@ $cid = $from["id"];
 
 $cbid = $update["callback_query"]["id"];
 $cbdata = $update["callback_query"]["data"];
+$cbuid = $update["callback_query"]["from"]["id"];
 
 $glob = false;
 
