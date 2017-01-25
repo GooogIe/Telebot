@@ -144,11 +144,16 @@ function callbackanswer($id, $text, $alert){
   apiRequest("answerCallbackQuery?callback_query_id=$id&show_alert=$alert&text=$text");
 }
 
-function edit($cd, $mid, $tx){
+function edit($cd, $mid, $tx, $inline){
 	if(strpos($tx, "\n")){
 		$tx = urlencode($tx);
 	}
-  apiRequest("editMessageText?chat_id=$cd&message_id=$mid&text=$tx");
+	
+	if($inline == false){
+            apiRequest("editMessageText?chat_id=$cd&message_id=$mid&text=$tx");
+	}else{
+            apiRequest("editMessageText?chat_id=$cd&inline_message_id=$mid&text=$tx");
+	}
 }
 
 function forward($id, $frm, $mid){
