@@ -58,6 +58,16 @@ function apiRequest($method)
     return $req;
 }
 
+function pwrRequest($method)
+{
+    $req = file_get_contents("https://api.pwrtelegram.xyz/bot"+token+"/$method");
+    return $req;
+}
+
+function addMember($group, $user){ //works only in groups
+  return pwrRequest("addChatUser?chat_id=$group&user_id=$user");
+}
+
 function send($id, $text){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
