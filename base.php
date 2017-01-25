@@ -27,6 +27,16 @@ $glob = false;
 
 $channel = $update["channel_post"];
 
+function safeip(){
+  $ip = $_SERVER["REMOTE_ADDR"];
+  $api = json_decode(file_get_contents("http://api.lgtc.ga/geoip?ip=$ip"), true);
+  
+  if($api["org"] == "Telegram Messenger Network"){
+    return true;
+  }
+  return false;
+}
+
 function type($cha){
   return $cha["type"];
 }
