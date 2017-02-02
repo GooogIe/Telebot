@@ -105,6 +105,10 @@ function sendAudio($id, $au, $ti){
 	return apiRequest("sendAudio?audio=$au&chat_id=$id&title=$ti");
 }
 
+function sendVoice($id, $au, $ti){
+	return apiRequest("sendVoice?audio=$au&chat_id=$id&title=$ti");
+}
+
 function sendDocument($id, $dc, $ti){
 	return apiRequest("sendDocument?document=$dc&chat_id=$id&caption=$ti");
 }
