@@ -2,6 +2,11 @@
 
 define('api', 'https://api.telegram.org/bot'.token.'/');
 
+//tb
+$version = "2.3";
+echo "Telebot $version by Neon";
+//tb
+
 $data = file_get_contents("php://input");
 $update = json_decode($data, true);
 
@@ -24,9 +29,11 @@ $cbid = $update["callback_query"]["id"];
 $cbdata = $update["callback_query"]["data"];
 $cbuid = $update["callback_query"]["from"]["id"];
 
-$glob = false;
-
 $channel = $update["channel_post"];
+
+function loadplugin($name){
+	include "plugins/$name";
+}
 
 function safeip(){
   $ip = $_SERVER["REMOTE_ADDR"];
@@ -65,36 +72,30 @@ function pwrRequest($method)
     return $req;
 }
 
-function addMember($group, $user){ //works only in groups (not supergroups)
-  return pwrRequest("addChatUser?chat_id=$group&user_id=$user");
-}
 
-function send($id, $text){
+function send($id, $text, $mark, $webp, $reply_id, $hk){
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
 	}
-	return apiRequest("sendMessage?text=$text&chat_id=$id");
-}
-
-function sendMark($id, $text){
-	if(strpos($text, "\n")){
-		$text = urlencode($text);
+	
+	$r = "sendMessage?text=$text&chat_id=$id";
+	
+	if($mark == true){
+		$r .= "&parse_mode=Markdown";
 	}
-	return apiRequest("sendMessage?text=$text&chat_id=$id&parse_mode=Markdown&disable_web_page_preview=true");
-}
-
-function sendReply($id, $text, $mgi){
-	if(strpos($text, "\n")){
-		$text = urlencode($text);
+	
+	if($webp == false){
+		$r .= "&disable_web_page_preview=true");
 	}
-	return apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi");
-}
-
-function sendMarkReply($id, $text, $mgi){
-       if(strpos($text, "\n")){
-		$text = urlencode($text);
+	
+	if(isset($reply_id)){
+		$r .= "&reply_to_message_id=$reply_id";
 	}
-	return apiRequest("sendMessage?text=$text&chat_id=$id&reply_to_message_id=$mgi&parse_mode=Markdown");
+	
+	if($hk == true){
+		$r .= "&remove_keyboard=true";
+	}
+	
 }
 
 function sendPhoto($id, $im, $cap){
