@@ -85,7 +85,7 @@ function send($id, $text, $mark, $webp, $reply_id, $hk){
 	}
 	
 	if($webp == false){
-		$r .= "&disable_web_page_preview=true");
+		$r .= "&disable_web_page_preview=true";
 	}
 	
 	if(isset($reply_id)){
