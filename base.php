@@ -32,7 +32,7 @@ $cbuid = $update["callback_query"]["from"]["id"];
 $channel = $update["channel_post"];
 
 function loadplugin($name){
-	include "plugins/$name";
+	return include "plugins/$name.php";
 }
 
 function safeip(){
@@ -95,6 +95,8 @@ function send($id, $text, $mark, $webp, $reply_id, $hk){
 	if($hk == true){
 		$r .= "&remove_keyboard=true";
 	}
+	
+	apiRequest($r);
 	
 }
 
