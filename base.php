@@ -29,6 +29,12 @@ $cbid = $update["callback_query"]["id"];
 $cbdata = $update["callback_query"]["data"];
 $cbuid = $update["callback_query"]["from"]["id"];
 
+$inline = $update["inline_query"]["id"];
+$msgin = $update["inline_query"]["query"];
+$userIDin = $update["inline_query"]["from"]["id"];
+$usernamein = $update["inline_query"]["from"]["username"];
+$namein = $update["inline_query"]["from"]["first_name"];
+
 $channel = $update["channel_post"];
 
 function loadplugin($name){
@@ -195,6 +201,11 @@ $menu = $menud;
 	$d2 = json_encode($d2);
 	
 	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
+}
+
+function answerInlineQuery($inline, $array, $ct = 5) {
+	$json = json_encode($array);
+	return apiRequest("answerInlineQuery?inline_query_id=$inline&results=$json&cache_time=$ct");
 }
 
 
