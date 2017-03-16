@@ -203,7 +203,7 @@ $menu = $menud;
 	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
 }
 
-function answerInlineQuery($inline, $array, $ct = 5) {
+function answerInlineQuery($in, $arr, $ct = 5) {
 	$json = json_encode($array);
 	return apiRequest("answerInlineQuery?inline_query_id=$inline&results=$json&cache_time=$ct");
 }
