@@ -66,10 +66,16 @@ function is($word,$con)
     return strncmp($word, $con, strlen($con)) === 0;
 }
 
-function apiRequest($method)
+function apiRequest($method, $var)
 {
-    $req = file_get_contents(api.$method);
-    return $req;
+    $ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, api.$method);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $var);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$req = curl_exec($ch);
+	curl_close($ch);
+	return $req;
 }
 
 function pwrRequest($method)
@@ -84,7 +90,7 @@ function send($id, $text, $mark, $webp, $reply_id, $hk){
 		$text = urlencode($text);
 	}
 	
-	$r = "sendMessage?text=$text&chat_id=$id";
+	$r = "text=$text&chat_id=$id";
 	
 	if($mark == true){
 		$r .= "&parse_mode=Markdown";
@@ -102,36 +108,35 @@ function send($id, $text, $mark, $webp, $reply_id, $hk){
 		$r .= "&remove_keyboard=true";
 	}
 	
-	apiRequest($r);
+	apiRequest("sendMessage", $r);
 	
 }
 
 function sendPhoto($id, $im, $cap){
-	return apiRequest("sendPhoto?photo=$im&chat_id=$id&caption=$cap");
+	return apiRequest("sendPhoto", "photo=$im&chat_id=$id&caption=$cap");
 }
 
 function sendAudio($id, $au, $ti){
-	return apiRequest("sendAudio?audio=$au&chat_id=$id&title=$ti");
+	return apiRequest("sendAudio", "audio=$au&chat_id=$id&title=$ti");
 }
 
 function sendVoice($id, $au, $ti){
-	return apiRequest("sendVoice?audio=$au&chat_id=$id&title=$ti");
+	return apiRequest("sendVoice", "audio=$au&chat_id=$id&title=$ti");
 }
 
 function sendDocument($id, $dc, $ti){
-	return apiRequest("sendDocument?document=$dc&chat_id=$id&caption=$ti");
+	return apiRequest("sendDocument", "document=$dc&chat_id=$id&caption=$ti");
 }
 
 function keyboard($tasti, $text, $cd){
-$dioporco = $tasti;
-
-$diocane = json_encode($dioporco);
+	$dioporco = $tasti;
+	$diocane = json_encode($dioporco);
 	
 	if(strpos($text, "\n")){
 		$text = urlencode($text);
 	}
 	
-apiRequest("sendMessage?text=$text&chat_id=$cd&reply_markup=$diocane");
+	apiRequest("sendMessage", "text=$text&chat_id=$cd&reply_markup=$diocane");
 }
 
 function callback($up){
@@ -147,15 +152,15 @@ function leftMember($up){
 }
 
 function ban($kid, $cd){
-  apiRequest("kickChatMember?chat_id=$kid&user_id=$cd");
+  apiRequest("kickChatMember", "chat_id=$kid&user_id=$cd");
 }
 
 function unban($kid, $cd){
-  apiRequest("unbanChatMember?chat_id=$kid&user_id=$cd");
+  apiRequest("unbanChatMember", "chat_id=$kid&user_id=$cd");
 }
 
 function callbackanswer($id, $text, $alert){
-  apiRequest("answerCallbackQuery?callback_query_id=$id&show_alert=$alert&text=$text");
+  apiRequest("answerCallbackQuery", "callback_query_id=$id&show_alert=$alert&text=$text");
 }
 
 function edit($cd, $mid, $tx, $inline){
@@ -164,18 +169,18 @@ function edit($cd, $mid, $tx, $inline){
 	}
 	
 	if($inline == false){
-            apiRequest("editMessageText?chat_id=$cd&message_id=$mid&text=$tx");
+            apiRequest("editMessageText", "chat_id=$cd&message_id=$mid&text=$tx");
 	}else{
-            apiRequest("editMessageText?chat_id=$cd&inline_message_id=$mid&text=$tx");
+            apiRequest("editMessageText", "chat_id=$cd&inline_message_id=$mid&text=$tx");
 	}
 }
 
 function forward($id, $frm, $mid){
-  return apiRequest("forwardMessage?chat_id=$id&from_chat_id=$frm&message_id=$mid");
+  return apiRequest("forwardMessage", "chat_id=$id&from_chat_id=$frm&message_id=$mid");
 }
 
 function getAdmins($cha){
-   $req = apiRequest("getChatAdministrators?chat_id=$cha");
+   $req = apiRequest("getChatAdministrators", "chat_id=$cha");
    $admins = json_decode($req, true);
    $idlist = array();
 	
@@ -200,12 +205,12 @@ $menu = $menud;
 	
 	$d2 = json_encode($d2);
 	
-	return apiRequest("sendmessage?chat_id=$chat&text=$tx&reply_markup=$d2");
+	return apiRequest("sendmessage", "chat_id=$chat&text=$tx&reply_markup=$d2");
 }
 
 function answerInlineQuery($in, $arr, $ct = 5) {
 	$json = json_encode($array);
-	return apiRequest("answerInlineQuery?inline_query_id=$inline&results=$json&cache_time=$ct");
+	return apiRequest("answerInlineQuery", "inline_query_id=$inline&results=$json&cache_time=$ct");
 }
 
 
