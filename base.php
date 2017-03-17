@@ -4,7 +4,7 @@ define('api', 'https://api.telegram.org/bot'.token.'/');
 
 //tb
 $version = "2.3";
-echo "Telebot $version by Neon";
+echo "Telebot $version by Telebot Team";
 //tb
 
 $data = file_get_contents("php://input");
