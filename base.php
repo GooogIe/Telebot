@@ -84,6 +84,9 @@ function pwrRequest($method)
     return $req;
 }
 
+function getMe(){
+  return json_decode(apiRequest("getMe"))["result"];
+}
 
 function send($id, $text, $mark, $webp, $reply_id, $hk){
 	if(strpos($text, "\n")){
