@@ -68,7 +68,7 @@ function is($word,$con)
 
 function apiRequest($method, $var)
 {
-    $ch = curl_init();
+   	 $ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, api.$method);
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $var);
@@ -80,8 +80,18 @@ function apiRequest($method, $var)
 
 function pwrRequest($method)
 {
-    $req = file_get_contents("https://api.pwrtelegram.xyz/bot".token."/$method");
-    return $req;
+       	 $ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, "https://api.pwrtelegram.xyz/bot".token."/".$method);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $var);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$req = curl_exec($ch);
+	curl_close($ch);
+	return $req;
+}
+
+function deleteMessages($cd, $ms){
+    return pwrRequest("deleteMessages", "chat_id=$cd&ids=" . json_encode($ms));
 }
 
 function getMe(){
