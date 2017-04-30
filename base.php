@@ -201,7 +201,35 @@ function getAdmins($cha){
 	   $dd = $adm["user"];
 	   array_push($idlist, $dd);
    }
-	return $idlist;
+
+   $a = $idlist;
+   $robe = array();
+   foreach($a as $koko){
+     array_push($robe, $koko["id"]);
+   }
+	
+  return $robe;
+}
+
+function getCreator($cha){
+   $req = apiRequest("getChatAdministrators", "chat_id=$cha");
+   $j = json_decode($req, true);
+   foreach($j as $a){
+	$x = array();
+	array_push($x, $a);
+    }
+
+    $i = 0;
+    foreach($x as $d){
+        foreach($d as $q){
+	    if($q["status"] != "creator"){
+		    $i += 1;
+		}else{
+		    return array_diff($q["user"], [$q[$i]]);
+		}
+	    }
+        }
+
 }
 		   
 
