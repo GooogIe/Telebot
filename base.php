@@ -3,7 +3,7 @@
 define('api', 'https://api.telegram.org/bot'.token.'/');
 
 //tb
-$version = "2.3";
+$version = "2.7";
 echo "Telebot $version by Telebot Team";
 //tb
 
@@ -254,5 +254,8 @@ function answerInlineQuery($in, $arr, $ct = 5) {
 	return apiRequest("answerInlineQuery", "inline_query_id=$inline&results=$json&cache_time=$ct");
 }
 
+function sendInvoice($ch, $t, $d, $pl, $pt, $sp, $cr, $prc){
+	apiRequest("sendInvoice", "chat_id=$cd&title=$t&description=$d&payload=$pl&provider_token=$pt&start_parameter=$sp&currency=$cr&prices=$prc");
+}
 
 ?>
